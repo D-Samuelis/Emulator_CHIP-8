@@ -1,4 +1,6 @@
-#include <array>
+#pragma once
+
+#include <cstdint>
 #include "bus.h"
 
 /**
@@ -35,7 +37,7 @@ private:
     uint8_t V[16]{};
 
     /**
-     * The Chip-8 has a 16-bit register called Index register. 
+     * The Chip-8 has a 16-bit register called Index register.
      * This register is generally used to store memory addresses, so only the lowest (rightmost) 12 bits are usually used.
      */
     uint16_t I{};
@@ -57,17 +59,26 @@ private:
     uint16_t stack[16]{};
 
     /**
-     * The delay timer is active whenever the delay timer register (DT) is non-zero. 
+     * The delay timer is active whenever the delay timer register (DT) is non-zero.
      * This timer does nothing more than subtract 1 from the value of DT at a rate of 60Hz. When DT reaches 0, it deactivates.
      */
     uint8_t delay_timer{};
 
     /**
-     * The sound timer is active whenever the sound timer register (ST) is non-zero. 
-     * This timer also decrements at a rate of 60Hz, however, as long as ST's value is greater than zero, the Chip-8 buzzer will sound. 
+     * The sound timer is active whenever the sound timer register (ST) is non-zero.
+     * This timer also decrements at a rate of 60Hz, however, as long as ST's value is greater than zero, the Chip-8 buzzer will sound.
      * When ST reaches zero, the sound timer deactivates.
      */
     uint8_t sound_timer{};
+
+    /**
+     * State for the Fx0A (LD Vx, K) instruction. CHIP-8's original behavior
+     * waits for a key to be pressed AND released before resuming - so once a
+     * key-down is seen, that specific key is "latched" here and execution
+     * keeps stalling on this instruction until that same key comes back up.
+     */
+    bool waiting_for_key_release{false};
+    uint8_t key_being_waited_on{0};
 
     /**
      * Function to execute the given opcode.

@@ -54,6 +54,36 @@ build CMakeFiles/chip8emu.dir/src/main.cpp.obj: CXX_COMPILER__chip8emu_unscanned
   TARGET_COMPILE_PDB = CMakeFiles\chip8emu.dir\
   TARGET_PDB = chip8emu.pdb
 
+build CMakeFiles/chip8emu.dir/src/cpu.cpp.obj: CXX_COMPILER__chip8emu_unscanned_ D$:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src/cpu.cpp || cmake_object_order_depends_target_chip8emu
+  DEFINES = -DGLFW_DLL
+  DEP_FILE = CMakeFiles\chip8emu.dir\src\cpu.cpp.obj.d
+  FLAGS = -std=gnu++17
+  INCLUDES = -ID:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src
+  OBJECT_DIR = CMakeFiles\chip8emu.dir
+  OBJECT_FILE_DIR = CMakeFiles\chip8emu.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\chip8emu.dir\
+  TARGET_PDB = chip8emu.pdb
+
+build CMakeFiles/chip8emu.dir/src/bus.cpp.obj: CXX_COMPILER__chip8emu_unscanned_ D$:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src/bus.cpp || cmake_object_order_depends_target_chip8emu
+  DEFINES = -DGLFW_DLL
+  DEP_FILE = CMakeFiles\chip8emu.dir\src\bus.cpp.obj.d
+  FLAGS = -std=gnu++17
+  INCLUDES = -ID:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src
+  OBJECT_DIR = CMakeFiles\chip8emu.dir
+  OBJECT_FILE_DIR = CMakeFiles\chip8emu.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\chip8emu.dir\
+  TARGET_PDB = chip8emu.pdb
+
+build CMakeFiles/chip8emu.dir/src/display.cpp.obj: CXX_COMPILER__chip8emu_unscanned_ D$:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src/display.cpp || cmake_object_order_depends_target_chip8emu
+  DEFINES = -DGLFW_DLL
+  DEP_FILE = CMakeFiles\chip8emu.dir\src\display.cpp.obj.d
+  FLAGS = -std=gnu++17
+  INCLUDES = -ID:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src
+  OBJECT_DIR = CMakeFiles\chip8emu.dir
+  OBJECT_FILE_DIR = CMakeFiles\chip8emu.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\chip8emu.dir\
+  TARGET_PDB = chip8emu.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target chip8emu
@@ -62,7 +92,7 @@ build CMakeFiles/chip8emu.dir/src/main.cpp.obj: CXX_COMPILER__chip8emu_unscanned
 #############################################
 # Link the executable chip8emu.exe
 
-build chip8emu.exe: CXX_EXECUTABLE_LINKER__chip8emu_ CMakeFiles/chip8emu.dir/src/main.cpp.obj | C$:/msys64/mingw64/lib/libglew32.dll.a C$:/msys64/mingw64/lib/libglfw3.dll.a
+build chip8emu.exe: CXX_EXECUTABLE_LINKER__chip8emu_ CMakeFiles/chip8emu.dir/src/main.cpp.obj CMakeFiles/chip8emu.dir/src/cpu.cpp.obj CMakeFiles/chip8emu.dir/src/bus.cpp.obj CMakeFiles/chip8emu.dir/src/display.cpp.obj | C$:/msys64/mingw64/lib/libglew32.dll.a C$:/msys64/mingw64/lib/libglfw3.dll.a
   LINK_LIBRARIES = -lopengl32  C:/msys64/mingw64/lib/libglew32.dll.a  C:/msys64/mingw64/lib/libglfw3.dll.a  -lopengl32  -lglu32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\chip8emu.dir
   POST_BUILD = cd .

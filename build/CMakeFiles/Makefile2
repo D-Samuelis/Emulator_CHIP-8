@@ -80,12 +80,12 @@ clean: CMakeFiles/chip8emu.dir/clean
 CMakeFiles/chip8emu.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=1,2,3,4 "Built target chip8emu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target chip8emu"
 .PHONY : CMakeFiles/chip8emu.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/chip8emu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/chip8emu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles 0
 .PHONY : CMakeFiles/chip8emu.dir/rule

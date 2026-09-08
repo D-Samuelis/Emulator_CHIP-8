@@ -1,6 +1,7 @@
 #include "cpu.h"
-#include <iostream>
+#include <cstdlib>
 #include <cstring>
+#include <iostream>
 
 void CPU::reset()
 {
@@ -11,6 +12,8 @@ void CPU::reset()
     memset(stack, 0, sizeof(stack));
     delay_timer = 0;
     sound_timer = 0;
+    waiting_for_key_release = false;
+    key_being_waited_on = 0;
 }
 
 void CPU::step(Bus &bus)
@@ -62,7 +65,7 @@ void CPU::execute(uint16_t opcode, Bus &bus)
         switch (opcode)
         {
         case 0x00E0: // CLS: Clear screen
-            memset(bus.display, 0, sizeof(bus.display));
+            bus.clearDisplay();
             break;
         case 0x00EE: // RET: Return from subroutine
             pc = stack[--sp];
@@ -194,7 +197,6 @@ void CPU::execute(uint16_t opcode, Bus &bus)
         V[x] = rand() % 256 & kk;
         break;
 
-    // ??????????? get back to this one later ???????????
     case 0xD000: // DRW Vx, Vy, nibble (Dxyn): Draw sprite at (Vx, Vy)
     {
         uint8_t start_x = V[x] % DISPLAY_WIDTH;
@@ -221,14 +223,11 @@ void CPU::execute(uint16_t opcode, Bus &bus)
                 {
                     int pixel_index = (start_y + row) * DISPLAY_WIDTH + (start_x + col);
 
-                    // Collision check: turning an ON pixel OFF
-                    if (bus.display[pixel_index] == 1)
+                    // XOR the pixel; drawPixel reports collision (an ON pixel being turned OFF)
+                    if (bus.drawPixel(pixel_index))
                     {
                         V[0xF] = 1;
                     }
-
-                    // XOR screen pixel
-                    bus.display[pixel_index] ^= 1;
                 }
             }
         }
@@ -243,14 +242,14 @@ void CPU::execute(uint16_t opcode, Bus &bus)
         switch (kk)
         {
         case 0x9E: // SKP Vx (EX9E): Skip next instruction if key is pressed
-            if (bus.keys[key_index])
+            if (bus.isKeyPressed(key_index))
             {
                 pc += 2;
             }
             break;
 
         case 0xA1: // SKNP Vx (EXA1): Skip next instruction if key is NOT pressed
-            if (!bus.keys[key_index])
+            if (!bus.isKeyPressed(key_index))
             {
                 pc += 2;
             }
@@ -272,27 +271,34 @@ void CPU::execute(uint16_t opcode, Bus &bus)
             break;
         }
         case 0x0A:
-        { // LD Vx, K (Fx0A): Wait for key press, store key index in Vx
+        { // LD Vx, K (Fx0A): Wait for a key to be pressed AND released, store key index in Vx
             /**
-             * Needs to be implemented as a non-blocking wait.
-             * The CPU should halt execution until a key is pressed, but the emulator should continue to run.
-             * Check all the keys, if none are pressed, decrement the program counter.
+             * Implemented as a non-blocking wait: the CPU re-executes this same
+             * instruction (via pc -= 2) every step until it's satisfied, while the
+             * rest of the emulator keeps running.
              */
-            bool key_pressed = false;
-
-            for (uint8_t i = 0; i < 16; ++i)
+            if (!waiting_for_key_release)
             {
-                if (bus.keys[i])
+                for (uint8_t i = 0; i < 16; ++i)
                 {
-                    V[x] = i;
-                    key_pressed = true;
-                    break;
+                    if (bus.isKeyPressed(i))
+                    {
+                        waiting_for_key_release = true;
+                        key_being_waited_on = i;
+                        break;
+                    }
                 }
-            }
 
-            if (!key_pressed)
+                pc -= 2; // Always stall this step: either still polling, or now waiting for release.
+            }
+            else if (bus.isKeyPressed(key_being_waited_on))
             {
-                pc -= 2;
+                pc -= 2; // Still held down - keep waiting.
+            }
+            else
+            {
+                V[x] = key_being_waited_on;
+                waiting_for_key_release = false;
             }
             break;
         }
@@ -314,10 +320,10 @@ void CPU::execute(uint16_t opcode, Bus &bus)
             bus.write8(I + 2, V[x] % 10);
             break;
         case 0x55: // LD [I], Vx (Fx55): Store registers V0 through Vx in memory starting at I
-            memcpy(&bus.memory[I], V, x + 1);
+            bus.storeRegisters(I, V, x + 1);
             break;
         case 0x65: // LD Vx, [I] (Fx65): Read registers V0 through Vx from memory starting at I
-            memcpy(V, &bus.memory[I], x + 1);
+            bus.loadRegisters(I, V, x + 1);
             break;
         default:
             std::cerr << "Unknown 0xF000 opcode: " << std::hex << opcode << "\n";

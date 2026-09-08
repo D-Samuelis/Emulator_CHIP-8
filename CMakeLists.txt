@@ -12,6 +12,9 @@ add_executable(chip8emu
     src/main.cpp
     src/cpu.cpp
     src/bus.cpp
+    src/display.cpp
+    src/input.cpp
+    src/rom_loader.cpp
 )
 
 target_include_directories(chip8emu PRIVATE src)

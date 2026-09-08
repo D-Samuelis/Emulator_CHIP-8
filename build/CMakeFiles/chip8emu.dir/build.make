@@ -113,11 +113,59 @@ CMakeFiles/chip8emu.dir/src/bus.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chip8emu.dir/src/bus.cpp.s"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\bus.cpp -o CMakeFiles\chip8emu.dir\src\bus.cpp.s
 
+CMakeFiles/chip8emu.dir/src/display.cpp.obj: CMakeFiles/chip8emu.dir/flags.make
+CMakeFiles/chip8emu.dir/src/display.cpp.obj: CMakeFiles/chip8emu.dir/includes_CXX.rsp
+CMakeFiles/chip8emu.dir/src/display.cpp.obj: D:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src/display.cpp
+CMakeFiles/chip8emu.dir/src/display.cpp.obj: CMakeFiles/chip8emu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/chip8emu.dir/src/display.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chip8emu.dir/src/display.cpp.obj -MF CMakeFiles\chip8emu.dir\src\display.cpp.obj.d -o CMakeFiles\chip8emu.dir\src\display.cpp.obj -c D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\display.cpp
+
+CMakeFiles/chip8emu.dir/src/display.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chip8emu.dir/src/display.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\display.cpp > CMakeFiles\chip8emu.dir\src\display.cpp.i
+
+CMakeFiles/chip8emu.dir/src/display.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chip8emu.dir/src/display.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\display.cpp -o CMakeFiles\chip8emu.dir\src\display.cpp.s
+
+CMakeFiles/chip8emu.dir/src/input.cpp.obj: CMakeFiles/chip8emu.dir/flags.make
+CMakeFiles/chip8emu.dir/src/input.cpp.obj: CMakeFiles/chip8emu.dir/includes_CXX.rsp
+CMakeFiles/chip8emu.dir/src/input.cpp.obj: D:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src/input.cpp
+CMakeFiles/chip8emu.dir/src/input.cpp.obj: CMakeFiles/chip8emu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/chip8emu.dir/src/input.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chip8emu.dir/src/input.cpp.obj -MF CMakeFiles\chip8emu.dir\src\input.cpp.obj.d -o CMakeFiles\chip8emu.dir\src\input.cpp.obj -c D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\input.cpp
+
+CMakeFiles/chip8emu.dir/src/input.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chip8emu.dir/src/input.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\input.cpp > CMakeFiles\chip8emu.dir\src\input.cpp.i
+
+CMakeFiles/chip8emu.dir/src/input.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chip8emu.dir/src/input.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\input.cpp -o CMakeFiles\chip8emu.dir\src\input.cpp.s
+
+CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj: CMakeFiles/chip8emu.dir/flags.make
+CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj: CMakeFiles/chip8emu.dir/includes_CXX.rsp
+CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj: D:/01-Samuel/01-Projects/03-Cpp/06-Emulator_CHIP8/src/rom_loader.cpp
+CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj: CMakeFiles/chip8emu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj -MF CMakeFiles\chip8emu.dir\src\rom_loader.cpp.obj.d -o CMakeFiles\chip8emu.dir\src\rom_loader.cpp.obj -c D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\rom_loader.cpp
+
+CMakeFiles/chip8emu.dir/src/rom_loader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chip8emu.dir/src/rom_loader.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\rom_loader.cpp > CMakeFiles\chip8emu.dir\src\rom_loader.cpp.i
+
+CMakeFiles/chip8emu.dir/src/rom_loader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chip8emu.dir/src/rom_loader.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\src\rom_loader.cpp -o CMakeFiles\chip8emu.dir\src\rom_loader.cpp.s
+
 # Object files for target chip8emu
 chip8emu_OBJECTS = \
 "CMakeFiles/chip8emu.dir/src/main.cpp.obj" \
 "CMakeFiles/chip8emu.dir/src/cpu.cpp.obj" \
-"CMakeFiles/chip8emu.dir/src/bus.cpp.obj"
+"CMakeFiles/chip8emu.dir/src/bus.cpp.obj" \
+"CMakeFiles/chip8emu.dir/src/display.cpp.obj" \
+"CMakeFiles/chip8emu.dir/src/input.cpp.obj" \
+"CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj"
 
 # External object files for target chip8emu
 chip8emu_EXTERNAL_OBJECTS =
@@ -125,13 +173,16 @@ chip8emu_EXTERNAL_OBJECTS =
 chip8emu.exe: CMakeFiles/chip8emu.dir/src/main.cpp.obj
 chip8emu.exe: CMakeFiles/chip8emu.dir/src/cpu.cpp.obj
 chip8emu.exe: CMakeFiles/chip8emu.dir/src/bus.cpp.obj
+chip8emu.exe: CMakeFiles/chip8emu.dir/src/display.cpp.obj
+chip8emu.exe: CMakeFiles/chip8emu.dir/src/input.cpp.obj
+chip8emu.exe: CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj
 chip8emu.exe: CMakeFiles/chip8emu.dir/build.make
 chip8emu.exe: C:/msys64/mingw64/lib/libglew32.dll.a
 chip8emu.exe: C:/msys64/mingw64/lib/libglfw3.dll.a
 chip8emu.exe: CMakeFiles/chip8emu.dir/linkLibs.rsp
 chip8emu.exe: CMakeFiles/chip8emu.dir/objects1.rsp
 chip8emu.exe: CMakeFiles/chip8emu.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable chip8emu.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\01-Samuel\01-Projects\03-Cpp\06-Emulator_CHIP8\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable chip8emu.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\chip8emu.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

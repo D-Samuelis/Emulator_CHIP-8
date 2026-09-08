@@ -176,6 +176,54 @@ src/cpu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/cpu.cpp.s
 .PHONY : src/cpu.cpp.s
 
+src/display.obj: src/display.cpp.obj
+.PHONY : src/display.obj
+
+# target to build an object file
+src/display.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/display.cpp.obj
+.PHONY : src/display.cpp.obj
+
+src/display.i: src/display.cpp.i
+.PHONY : src/display.i
+
+# target to preprocess a source file
+src/display.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/display.cpp.i
+.PHONY : src/display.cpp.i
+
+src/display.s: src/display.cpp.s
+.PHONY : src/display.s
+
+# target to generate assembly for a file
+src/display.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/display.cpp.s
+.PHONY : src/display.cpp.s
+
+src/input.obj: src/input.cpp.obj
+.PHONY : src/input.obj
+
+# target to build an object file
+src/input.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/input.cpp.obj
+.PHONY : src/input.cpp.obj
+
+src/input.i: src/input.cpp.i
+.PHONY : src/input.i
+
+# target to preprocess a source file
+src/input.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/input.cpp.i
+.PHONY : src/input.cpp.i
+
+src/input.s: src/input.cpp.s
+.PHONY : src/input.s
+
+# target to generate assembly for a file
+src/input.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/input.cpp.s
+.PHONY : src/input.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -200,6 +248,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/rom_loader.obj: src/rom_loader.cpp.obj
+.PHONY : src/rom_loader.obj
+
+# target to build an object file
+src/rom_loader.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/rom_loader.cpp.obj
+.PHONY : src/rom_loader.cpp.obj
+
+src/rom_loader.i: src/rom_loader.cpp.i
+.PHONY : src/rom_loader.i
+
+# target to preprocess a source file
+src/rom_loader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/rom_loader.cpp.i
+.PHONY : src/rom_loader.cpp.i
+
+src/rom_loader.s: src/rom_loader.cpp.s
+.PHONY : src/rom_loader.s
+
+# target to generate assembly for a file
+src/rom_loader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\chip8emu.dir\build.make CMakeFiles/chip8emu.dir/src/rom_loader.cpp.s
+.PHONY : src/rom_loader.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -215,9 +287,18 @@ help:
 	@echo ... src/cpu.obj
 	@echo ... src/cpu.i
 	@echo ... src/cpu.s
+	@echo ... src/display.obj
+	@echo ... src/display.i
+	@echo ... src/display.s
+	@echo ... src/input.obj
+	@echo ... src/input.i
+	@echo ... src/input.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/rom_loader.obj
+	@echo ... src/rom_loader.i
+	@echo ... src/rom_loader.s
 .PHONY : help
 
 
