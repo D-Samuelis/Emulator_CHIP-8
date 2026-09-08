@@ -1,0 +1,3 @@
+C:\Strawberry\c\bin\cmake.exe -E rm -f CMakeFiles\chip8emu.dir/objects.a
+C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\chip8emu.dir/objects.a @CMakeFiles\chip8emu.dir\objects1.rsp
+C:\msys64\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\chip8emu.dir/objects.a -Wl,--no-whole-archive -o chip8emu.exe -Wl,--out-implib,libchip8emu.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\chip8emu.dir\linkLibs.rsp
