@@ -1,5 +1,0 @@
-# ninja log v6
-9	113	8105977081081513	CMakeFiles/chip8emu.dir/src/bus.cpp.obj	32b017afcda1809a
-12	188	8105977081111524	CMakeFiles/chip8emu.dir/src/display.cpp.obj	b55cb68c3302f554
-7	228	8105977081051534	CMakeFiles/chip8emu.dir/src/cpu.cpp.obj	25537aea2fba3120
-4	287	8105977081021532	CMakeFiles/chip8emu.dir/src/main.cpp.obj	115a144a88c5fe83
