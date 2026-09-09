@@ -6,7 +6,7 @@ The project implements the CHIP-8 virtual machine, including its CPU, memory, in
 
 ## Reference
 
-Implemented from scratch, the emulator follows the behavior described in the [CHIP-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#2nnn).
+Implemented from scratch, the emulator follows the behavior described in the [CHIP-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM).
 
 Test ROMs are from the [chip8-test-suite](https://github.com/Timendus/chip8-test-suite#flags-test) by Timendus.
 
