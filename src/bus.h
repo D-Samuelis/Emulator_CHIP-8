@@ -44,46 +44,68 @@ public:
     /**
      * Bounds-checked bulk copy of `count` register values into memory starting at `address`.
      * Used by CPU opcode Fx55 (LD [I], Vx). Any bytes that would fall outside RAM_SIZE are dropped.
+     * @param address The starting memory address to write to.
+     * @param regs Pointer to the register values to write.
+     * @param count The number of register values to write.
+     * @return void
      */
     void storeRegisters(uint16_t address, const uint8_t* regs, uint8_t count);
 
     /**
      * Bounds-checked bulk copy of `count` bytes from memory starting at `address` into registers.
      * Used by CPU opcode Fx65 (LD Vx, [I]). Any bytes that would fall outside RAM_SIZE are dropped.
+     * @param address The starting memory address to read from.
+     * @param regs Pointer to the register values to read into.
+     * @param count The number of register values to read.
+     * @return void
      */
     void loadRegisters(uint16_t address, uint8_t* regs, uint8_t count);
 
     /**
      * Clears the display buffer (CLS).
+     * @return void
      */
     void clearDisplay();
 
     /**
      * Reads the current state of a single pixel.
      * @param index Linear index into the DISPLAY_WIDTH x DISPLAY_HEIGHT buffer.
+     * @return true if the pixel is on, false otherwise.
      */
     bool getPixel(int index) const;
 
     /**
      * XORs the pixel at `index` on. Returns true if this turned an already-lit
      * pixel off (i.e. a collision, per the DRW instruction's VF semantics).
+     * @param index Linear index into the DISPLAY_WIDTH x DISPLAY_HEIGHT buffer.
+     * @return true if a collision occurred, false otherwise.
      */
     bool drawPixel(int index);
 
     /**
      * Read-only access to the full display buffer, e.g. for rendering.
+     * @return Pointer to the display buffer.
      */
     const uint8_t* getDisplayBuffer() const { return display; }
 
+    /**
+     * Returns the total size of the display buffer.
+     * @return The size of the display buffer.
+     */
     static constexpr int getDisplaySize() { return DISPLAY_WIDTH * DISPLAY_HEIGHT; }
 
     /**
      * Sets the pressed state of a single key (0x0 - 0xF).
+     * @param key The key index to set (0x0 - 0xF).
+     * @param pressed true if the key is pressed, false if released.
+     * @return void
      */
     void setKey(uint8_t key, bool pressed);
 
     /**
-     * Returns whether a given key (0x0 - 0xF) is currently pressed.
+     * Checks whether a given key (0x0 - 0xF) is currently pressed.
+     * @param key The key index to check (0x0 - 0xF).
+     * @return true if the key is pressed, false otherwise.
      */
     bool isKeyPressed(uint8_t key) const;
 

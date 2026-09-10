@@ -14,6 +14,7 @@ void CPU::reset()
     sound_timer = 0;
     waiting_for_key_release = false;
     key_being_waited_on = 0;
+    vblank_ready = true;
 }
 
 void CPU::step(Bus &bus)
@@ -30,6 +31,10 @@ void CPU::step(Bus &bus)
 
 void CPU::update_timers()
 {
+    // Called at 60Hz by the caller - this is our stand-in for the real
+    // vertical blank interrupt, so a new sprite draw becomes available now.
+    vblank_ready = true;
+
     if (delay_timer > 0)
     {
         --delay_timer;
@@ -37,7 +42,6 @@ void CPU::update_timers()
     if (sound_timer > 0)
     {
         --sound_timer;
-        // Optionally trigger audio tone/beep here
     }
 }
 
@@ -94,7 +98,8 @@ void CPU::execute(uint16_t opcode, Bus &bus)
     { // SE Vx, byte (3xkk): Skip next instruction if Vx == kk
         if (V[x] == kk)
         {
-            pc += 2; // Skip next instruction
+            // Skip next instruction
+            pc += 2;
         }
         break;
     }
@@ -103,7 +108,8 @@ void CPU::execute(uint16_t opcode, Bus &bus)
     { // SNE Vx, byte (4xkk): Skip next instruction if Vx != kk
         if (V[x] != kk)
         {
-            pc += 2; // Skip next instruction
+            // Skip next instruction
+            pc += 2;
         }
         break;
     }
@@ -112,7 +118,8 @@ void CPU::execute(uint16_t opcode, Bus &bus)
     { // SE Vx, Vy (5xy0): Skip next instruction if Vx == Vy
         if (V[x] == V[y])
         {
-            pc += 2; // Skip next instruction
+            // Skip next instruction
+            pc += 2;
         }
         break;
     }
@@ -138,12 +145,15 @@ void CPU::execute(uint16_t opcode, Bus &bus)
             break;
         case 0x1: // OR Vx, Vy (8xy1): Vx |= Vy
             V[x] |= V[y];
+            V[0xF] = 0;
             break;
         case 0x2: // AND Vx, Vy (8xy2): Vx &= Vy
             V[x] &= V[y];
+            V[0xF] = 0;
             break;
         case 0x3: // XOR Vx, Vy (8xy3): Vx ^= Vy
             V[x] ^= V[y];
+            V[0xF] = 0;
             break;
         case 0x4: // ADD Vx, Vy (8xy4): Vx += Vy (VF = carry)
         {
@@ -155,22 +165,38 @@ void CPU::execute(uint16_t opcode, Bus &bus)
             V[0xF] = carry;
             break;
         }
-        case 0x5:                           // SUB Vx, Vy (8xy5): Vx -= Vy (VF = NOT borrow)
-            V[0xF] = (V[x] > V[y]) ? 1 : 0; // Set VF to 1 if Vx > Vy, else 0
-            V[x] -= V[y];
+        case 0x5: // SUB Vx, Vy (8xy5): Vx -= Vy (VF = NOT borrow)
+        {
+            uint8_t borrow_flag = (V[x] >= V[y]) ? 1 : 0; // NOT borrow: no underflow, including Vx == Vy
+            uint8_t result = static_cast<uint8_t>(V[x] - V[y]);
+            V[x] = result;
+            V[0xF] = borrow_flag; // Written last, so it's correct even if x == 0xF
             break;
-        case 0x6:                // SHR Vx (8xy6): Vx >>= 1
-            V[0xF] = V[x] & 0x1; // Store least significant bit in VF
-            V[x] >>= 1;
+        }
+        case 0x6: // SHR Vx, Vy (8xy6): Vx = Vy >> 1, VF = shifted-out bit
+        {
+            uint8_t shifted_out = V[y] & 0x01;
+            uint8_t result = V[y] >> 1;
+            V[x] = result;
+            V[0xF] = shifted_out; // Ensure VF assignment happens after V[x] calculation
             break;
-        case 0x7:                           // SUBN Vx, Vy (8xy7): Vx = Vy - Vx (VF = NOT borrow)
-            V[0xF] = (V[y] > V[x]) ? 1 : 0; // Set VF to 1 if Vy > Vx, else 0
-            V[x] = V[y] - V[x];
+        }
+        case 0x7: // SUBN Vx, Vy (8xy7): Vx = Vy - Vx (VF = NOT borrow)
+        {
+            uint8_t borrow_flag = (V[y] >= V[x]) ? 1 : 0; // NOT borrow: no underflow, including Vy == Vx
+            uint8_t result = static_cast<uint8_t>(V[y] - V[x]);
+            V[x] = result;
+            V[0xF] = borrow_flag; // Written last, so it's correct even if x == 0xF
             break;
-        case 0xE:                           // SHL Vx (8xyE): Vx <<= 1
-            V[0xF] = (V[x] & 0x80) ? 1 : 0; // Store most significant bit in VF
-            V[x] <<= 1;
+        }
+        case 0xE: // SHL Vx, Vy (8xyE): Vx = Vy << 1, VF = shifted-out bit
+        {
+            uint8_t shifted_out = (V[y] & 0x80) >> 7;
+            uint8_t result = static_cast<uint8_t>(V[y] << 1);
+            V[x] = result;
+            V[0xF] = shifted_out;
             break;
+        }
         default:
             std::cerr << "Unknown 0x8000 opcode: " << std::hex << opcode << "\n";
             break;
@@ -199,6 +225,13 @@ void CPU::execute(uint16_t opcode, Bus &bus)
 
     case 0xD000: // DRW Vx, Vy, nibble (Dxyn): Draw sprite at (Vx, Vy)
     {
+        if (!vblank_ready)
+        {
+            pc -= 2; // No new frame yet - stall and retry this same instruction next step.
+            break;
+        }
+        vblank_ready = false; // Consume this frame's draw slot.
+
         uint8_t start_x = V[x] % DISPLAY_WIDTH;
         uint8_t start_y = V[y] % DISPLAY_HEIGHT;
 
@@ -289,11 +322,11 @@ void CPU::execute(uint16_t opcode, Bus &bus)
                     }
                 }
 
-                pc -= 2; // Always stall this step: either still polling, or now waiting for release.
+                pc -= 2; // Either still polling, or now waiting for release.
             }
             else if (bus.isKeyPressed(key_being_waited_on))
             {
-                pc -= 2; // Still held down - keep waiting.
+                pc -= 2; // Still held down
             }
             else
             {
@@ -321,9 +354,11 @@ void CPU::execute(uint16_t opcode, Bus &bus)
             break;
         case 0x55: // LD [I], Vx (Fx55): Store registers V0 through Vx in memory starting at I
             bus.storeRegisters(I, V, x + 1);
+            I += x + 1;
             break;
         case 0x65: // LD Vx, [I] (Fx65): Read registers V0 through Vx from memory starting at I
             bus.loadRegisters(I, V, x + 1);
+            I += x + 1;
             break;
         default:
             std::cerr << "Unknown 0xF000 opcode: " << std::hex << opcode << "\n";

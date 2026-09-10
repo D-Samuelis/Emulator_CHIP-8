@@ -81,6 +81,16 @@ private:
     uint8_t key_being_waited_on{0};
 
     /**
+     * Original COSMAC VIP hardware only redraws the display once per
+     * vertical blank (~60Hz), and DRW (Dxyn) blocks until the next one is
+     * available. This flag is raised by update_timers() - which the caller
+     * is expected to invoke at 60Hz, same rate as the real vblank interrupt -
+     * and consumed by the first Dxyn that runs afterward, forcing any
+     * further Dxyn in that same frame to stall until the next tick.
+     */
+    bool vblank_ready{true};
+
+    /**
      * Function to execute the given opcode.
      * @param opcode The opcode to execute.
      * @param bus The bus object to access memory.
