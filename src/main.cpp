@@ -6,6 +6,12 @@
 #include "input.h"
 #include "rom_loader.h"
 
+/**
+ * Adjustable parameter to control how many CPU instructions are executed per frame.
+ * Current frequency of 60 frames per second means that the CPU will run at 600Hz (10 instructions per frame).
+ */
+constexpr int CYCLES_PER_FRAME = 10;
+
 int main(int argc, char** argv) {
     if (!glfwInit()) {
         std::cerr << "GLFW init failed\n";
@@ -27,7 +33,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    // CHIP-8 emulator components initialization
+    // Initialiazation
     Bus bus;
     CPU cpu;
     Display display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
@@ -58,8 +64,8 @@ int main(int argc, char** argv) {
 
         timer_accumulator += delta_time;
 
-        // Run ~10 CPU instructions per frame (~600 Hz CPU clock rate)
-        for (int i = 0; i < 10; ++i) {
+        // Run CYCLES_PER_FRAME CPU instructions per frame
+        for (int i = 0; i < CYCLES_PER_FRAME; ++i) {
             cpu.step(bus);
         }
 
